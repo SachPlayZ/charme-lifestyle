@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import "./Slider.css"
+import "./Slider.scss"
 const Navbar = () => {
   return (
     <div>
