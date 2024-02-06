@@ -1,54 +1,103 @@
-from flask import Flask
+from flask import Flask, jsonify, request, send_from_directory
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, login_required
-from models import db, Product, User
-from authentication import login, logout, profile, signup
-from flask_migrate import Migrate
+from flask_bcrypt import Bcrypt
+import os
 
 app = Flask(__name__)
+CORS(app, origins="http://localhost:3000")
+bcrypt = Bcrypt(app)
+
+# SQLite database configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///marketplace.db'
-app.config['SECRET_KEY'] = 'your_secret_key'  # Change this to a secure secret key
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = 'uploads'
-db.init_app(app)
-login_manager = LoginManager(app)
-migrate = Migrate(app, db)
+app.config['SECRET_KEY'] = 'your_secret_key'  # Replace with a strong secret key
+db = SQLAlchemy(app)
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
+# User model
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50))
+    email = db.Column(db.String(100), unique=True, nullable=False)
+    password = db.Column(db.String(60), nullable=False)  # Hashed password
 
-@app.route('/')
-def index():
-    return 'Hello, World!'
+# Product model
+class Product(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    price = db.Column(db.Float, nullable=False)
+    image = db.Column(db.String(255), nullable=False)
 
-@app.route('/products')
-def display_products():
-    # Fetch all products from the database
+# Ensure 'uploads' folder exists
+uploads_folder = os.path.join(os.getcwd(), 'uploads')
+if not os.path.exists(uploads_folder):
+    os.makedirs(uploads_folder)
+
+# Create database tables
+db.create_all()
+
+# Route to serve product images
+@app.route('/images/<filename>')
+def get_image(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+# Route to get product data
+@app.route('/api/products', methods=['GET'])
+def get_products():
     products = Product.query.all()
+    product_list = [{"id": product.id, "name": product.name, "price": product.price, "image": f"/images/{product.image}"} for product in products]
+    return jsonify(product_list)
 
-    # For simplicity, display products without using templates
-    product_list = [f"{product.id}: {product.name}" for product in products]
-    return f'<h1>Product List</h1><ul>{"".join(f"<li>{product}</li>" for product in product_list)}</ul>'
+# Route to handle image uploads
+@app.route('/api/upload', methods=['POST'])
+def upload_image():
+    if 'file' not in request.files:
+        return jsonify({"error": "No file part"}), 400
 
-@app.route('/login', methods=['GET', 'POST'])
-def login_route():
-    return login()
+    file = request.files['file']
 
-@app.route('/logout')
-@login_required
-def logout_route():
-    return logout()
+    if file.filename == '':
+        return jsonify({"error": "No selected file"}), 400
 
-@app.route('/profile')
-@login_required
-def profile_route():
-    return profile()
+    if file:
+        filename = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+        file.save(filename)
 
-@app.route('/signup', methods=['GET', 'POST'])
-def signup_route():
-    return signup()
+        # Add product information to the database
+        new_product = Product(
+            name=request.form['name'],
+            description=request.form['description'],
+            price=float(request.form['price']),
+            image=file.filename
+        )
+        db.session.add(new_product)
+        db.session.commit()
+
+        return jsonify({"message": "File uploaded successfully"}), 201
+
+# Route to register a new user
+@app.route('/api/register', methods=['POST'])
+def register_user():
+    data = request.get_json()
+    name = data.get('name')
+    email = data.get('email')
+    password = data.get('password')
+
+    # Check if the email is already registered
+    existing_user = User.query.filter_by(email=email).first()
+    if existing_user:
+        return jsonify({"error": "Email already registered"}), 400
+
+    # Hash the password before storing it in the database
+    hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+
+    new_user = User(name=name, email=email, password=hashed_password)
+    db.session.add(new_user)
+    db.session.commit()
+
+    return jsonify({"message": "User registered successfully"}), 201
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
     app.run(debug=True)
