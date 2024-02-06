@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_required
 from models import db, Product, User
 from authentication import login, logout, profile, signup
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///marketplace.db'
@@ -10,6 +11,7 @@ app.config['SECRET_KEY'] = 'your_secret_key'  # Change this to a secure secret k
 app.config['UPLOAD_FOLDER'] = 'uploads'
 db.init_app(app)
 login_manager = LoginManager(app)
+migrate = Migrate(app, db)
 
 @login_manager.user_loader
 def load_user(user_id):
