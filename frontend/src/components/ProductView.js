@@ -9,7 +9,7 @@ const ProductDetails = () => {
   useEffect(() => {
     async function fetchProductDetails() {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/marketplace/get_products/${id}`, {
+        const response = await fetch(`http://127.0.0.1:5000/products?id=${id}`, {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
         });
@@ -37,7 +37,7 @@ const ProductDetails = () => {
         {product ? (
           <div className="row">
             <div className="col-md-3">
-              <img className='image-fluid sqrmage' src={'http://localhost:8000/backend/' + product.image.substring(9)} alt={product.name} />
+              <img className='image-fluid sqrmage' src={'http://localhost:5000/products/image?id=' + product.id} alt={product.name} />
             </div>
             <div className="col-md-6 text-light">
               <h2>{product.name}</h2>

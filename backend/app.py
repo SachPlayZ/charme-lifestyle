@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, session
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, session, send_from_directory, make_response
 from flask_cors import CORS
 import json
 import random
@@ -8,7 +8,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 app = Flask(__name__)
 CORS(app, origins='http://localhost:3000')
 
-db = SQL("sqlite:///edumadefun.db")
+db = SQL("sqlite:///charme.db")
 
 
 @app.route("/register", methods=["GET", "POST", "OPTIONS"])
@@ -54,7 +54,7 @@ def login():
         return jsonify({"success": False, "message": "Only POST requests allowed"})
 
 
-@app.route('/products', methods=['GET'])
+@app.route('/products', methods=['GET', 'OPTIONS'])
 def get_products(id=None):
     if request.method == "GET":
         id = request.args.get('id')
@@ -62,16 +62,37 @@ def get_products(id=None):
             try:
                 product = db.execute("SELECT * FROM products WHERE id = :id", id=id)[0]
                 if product:
-                    return jsonify({"product": product.to_dict()})
+                    return jsonify({"product": product})
                 else:
                     return jsonify({"error": "Product not found"}), 404
             except:
                 return jsonify({"error": "Invalid request"}), 400
         else:
             products = db.execute("SELECT * FROM products")
-            return jsonify({"products": [product.to_dict() for product in products]})
-    else:
-        return jsonify({"error": "GET request required."}), 405
+            return jsonify({"products": products})
+    if request.method == "OPTIONS":
+        return handle_preflight()
+    
+    
+
+@app.route('/products/image', methods=['GET', 'OPTIONS'])
+def image(id=None):
+    if request.method == "GET":
+        id = request.args.get('id')
+        if id is not None:
+            return send_from_directory('static', 'products/' + id + '.jpg')
+    if request.method == "OPTIONS":
+        return handle_preflight()
 
 
-app.run(debug=False)
+def handle_preflight():
+    response = make_response()
+    response.headers.add("Access-Control-Allow-Origin", "http://localhost:3000")
+    response.headers.add("Access-Control-Allow-Headers", "Content-Type,Authorization")
+    response.headers.add("Access-Control-Allow-Methods", "GET,POST,OPTIONS")
+    response.status_code = 200
+    return response
+
+
+if __name__ == "__main__":
+    app.run(debug=False)

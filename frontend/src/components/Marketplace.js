@@ -6,7 +6,7 @@ import "./Marketplace.css";
 const getData = async () => {
   try {
     const response = await fetch(
-      "http://127.0.0.1:8000/marketplace/get_products",
+      "http://127.0.0.1:5000/products",
       {
         method: "GET",
         headers: { "Content-Type": "application/json" },
@@ -49,8 +49,8 @@ const Marketplace = () => {
                   <div className="card ms-auto me-auto">
                     <img
                       src={
-                        "http://localhost:8000/backend/" +
-                        getProd.image.substring(9)
+                        "http://localhost:5000/products/image?id=" +
+                        getProd.id
                       }
                       className="card-img-top sqrmage"
                       alt=""
@@ -58,7 +58,7 @@ const Marketplace = () => {
                     <div className="card-body">
                       <h5 className="card-title">{getProd.name}</h5>
                       <p className="card-text">₹ {getProd.price}</p>
-                      <Link to={`/product/${getProd.id}`} className="button-87">
+                      <Link to={`/product/${getProd.id}`} className="button-1">
                         Buy Now
                       </Link>
                       <Link class="button-81" role="button">
