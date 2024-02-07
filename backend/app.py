@@ -1,103 +1,77 @@
-from flask import Flask, jsonify, request, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, session
 from flask_cors import CORS
-from flask_sqlalchemy import SQLAlchemy
-from flask_bcrypt import Bcrypt
-import os
+import json
+import random
+from cs50 import SQL
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-CORS(app, origins="http://localhost:3000")
-bcrypt = Bcrypt(app)
+CORS(app, origins='http://localhost:3000')
 
-# SQLite database configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///marketplace.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['UPLOAD_FOLDER'] = 'uploads'
-app.config['SECRET_KEY'] = 'your_secret_key'  # Replace with a strong secret key
-db = SQLAlchemy(app)
+db = SQL("sqlite:///edumadefun.db")
 
-# User model
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50))
-    email = db.Column(db.String(100), unique=True, nullable=False)
-    password = db.Column(db.String(60), nullable=False)  # Hashed password
 
-# Product model
-class Product(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
-    description = db.Column(db.Text, nullable=False)
-    price = db.Column(db.Float, nullable=False)
-    image = db.Column(db.String(255), nullable=False)
+@app.route("/register", methods=["GET", "POST", "OPTIONS"])
+def register():
+    if request.method == "POST":
+        data = request.get_json()
+        email = data.get("logemail")
+        username = data.get("logname")
+        password = data.get("logpass")
+        if not username:
+            return jsonify({"success": False, "message": "Username not provided"})
+        elif not password:
+            return jsonify({"success": False, "message": "Password not provided"})
+        elif db.execute("SELECT * FROM users WHERE email = :email", email=email):
+            return jsonify({"success": False, "message": "Email already exists"})
+        else:
+            password = generate_password_hash(password)
+            db.execute("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)", username=username, email=email, password=password)
+            return jsonify({"success": True, "message": "User created successfully"})
+    else:
+        return jsonify({"success": False, "message": "Only POST requests allowed"})
+    
 
-# Ensure 'uploads' folder exists
-uploads_folder = os.path.join(os.getcwd(), 'uploads')
-if not os.path.exists(uploads_folder):
-    os.makedirs(uploads_folder)
+@app.route("/login", methods=["GET", "POST", "OPTIONS"])
+def login():
+    if request.method == "POST":
+        data = request.get_json()
+        email = data.get("logemail")
+        password = data.get("logpass")
+        if not email:
+            return jsonify({"success": False, "message": "Username not provided"})
+        elif not password:
+            return jsonify({"success": False, "message": "Password not provided"})
+        elif not db.execute("SELECT * FROM users WHERE email = :email", email=email):
+            return jsonify({"success": False, "message": "Username does not exist"})
+        else:
+            user = db.execute("SELECT * FROM users WHERE email = :email", email=email)[0]
+            if check_password_hash(user["password"], password):
+                return jsonify({"success": True, "message": "Login successful"})
+            else:
+                return jsonify({"success": False, "message": "Incorrect password"})
+    else:
+        return jsonify({"success": False, "message": "Only POST requests allowed"})
 
-# Create database tables
-db.create_all()
 
-# Route to serve product images
-@app.route('/images/<filename>')
-def get_image(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+@app.route('/products', methods=['GET'])
+def get_products(id=None):
+    if request.method == "GET":
+        id = request.args.get('id')
+        if id is not None:
+            try:
+                product = db.execute("SELECT * FROM products WHERE id = :id", id=id)[0]
+                if product:
+                    return jsonify({"product": product.to_dict()})
+                else:
+                    return jsonify({"error": "Product not found"}), 404
+            except:
+                return jsonify({"error": "Invalid request"}), 400
+        else:
+            products = db.execute("SELECT * FROM products")
+            return jsonify({"products": [product.to_dict() for product in products]})
+    else:
+        return jsonify({"error": "GET request required."}), 405
 
-# Route to get product data
-@app.route('/api/products', methods=['GET'])
-def get_products():
-    products = Product.query.all()
-    product_list = [{"id": product.id, "name": product.name, "price": product.price, "image": f"/images/{product.image}"} for product in products]
-    return jsonify(product_list)
 
-# Route to handle image uploads
-@app.route('/api/upload', methods=['POST'])
-def upload_image():
-    if 'file' not in request.files:
-        return jsonify({"error": "No file part"}), 400
-
-    file = request.files['file']
-
-    if file.filename == '':
-        return jsonify({"error": "No selected file"}), 400
-
-    if file:
-        filename = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
-        file.save(filename)
-
-        # Add product information to the database
-        new_product = Product(
-            name=request.form['name'],
-            description=request.form['description'],
-            price=float(request.form['price']),
-            image=file.filename
-        )
-        db.session.add(new_product)
-        db.session.commit()
-
-        return jsonify({"message": "File uploaded successfully"}), 201
-
-# Route to register a new user
-@app.route('/api/register', methods=['POST'])
-def register_user():
-    data = request.get_json()
-    name = data.get('name')
-    email = data.get('email')
-    password = data.get('password')
-
-    # Check if the email is already registered
-    existing_user = User.query.filter_by(email=email).first()
-    if existing_user:
-        return jsonify({"error": "Email already registered"}), 400
-
-    # Hash the password before storing it in the database
-    hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
-
-    new_user = User(name=name, email=email, password=hashed_password)
-    db.session.add(new_user)
-    db.session.commit()
-
-    return jsonify({"message": "User registered successfully"}), 201
-
-if __name__ == '__main__':
-    app.run(debug=True)
+app.run(debug=False)
