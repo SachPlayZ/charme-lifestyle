@@ -98,6 +98,8 @@ const LandingPage = () => {
     backgroundSize: "cover"
 }}>
     <h2>Generate your Style.</h2>
+    <Link to='AiStylist' class="button-52" role="button">AI Stylist</Link>
+
 </section>
 
                 <section id="space">
