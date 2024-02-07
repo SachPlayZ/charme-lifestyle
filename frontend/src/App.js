@@ -1,8 +1,8 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom'
-import LandingPage from './LandingPage';
-import Login from './Login'
-import Marketplace from './Marketplace';
+import LandingPage from './components/LandingPage';
+import Login from './components/Login'
+import Marketplace from './components/Marketplace';
 
 function App() {
   return (

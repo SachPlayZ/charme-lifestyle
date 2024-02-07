@@ -88,11 +88,11 @@ const LandingPage = () => {
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover"
 }}>
-    <h1>Charmè.</h1>
+    <h1>Charm</h1><h1 className='pink'>è</h1><h1>.</h1>
 </section>
 
 <section id="knowledge" style={{ 
-    backgroundImage: "url(https://cdn.discordapp.com/attachments/1170293654896787498/1204406118445490226/WhatsApp_Image_2024-02-06_at_18.08.46_6b4d56ac.jpg?ex=65d49d9b&is=65c2289b&hm=df28cf8b7ec6933ac3aa99a64d031a322fe735e701b6ee360f8d572df49efe49&)",
+    backgroundImage: "url(https://cdn.discordapp.com/attachments/1169346758636224614/1204509432067792916/image.png?ex=65d4fdd3&is=65c288d3&hm=fa6be7d5bb223e8d3bef5fd6cd8cdbed9d52d1cc41341e92ff1be086e8d970eb&)",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover"
 }}>
@@ -141,7 +141,7 @@ const LandingPage = () => {
                     <form className='contactform'>
                         <input className='cont-text' type="text" placeholder="Name" />
                         <input className="email-text" type="email" placeholder="Email" />
-                        <textarea className='message-text' placeholder="Message"></textarea>
+                        <textarea className='message-text ' placeholder="Message"></textarea>
                         <button>Send</button>
                     </form>
                 </section>
