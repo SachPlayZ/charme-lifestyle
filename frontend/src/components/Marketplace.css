@@ -1,6 +1,6 @@
 .abo2{
     background-image:
-                linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
                 url(
 'https://cdn.discordapp.com/attachments/1170293654896787498/1204790431930515516/wallpaperflare.com_wallpaper.jpg?ex=65d60386&is=65c38e86&hm=7cfe1124d6f3ef7de6aca0f7ce28d9043759ec5335b486bd0c24c15cd90cd64e&');
                 background-size: cover;
@@ -24,39 +24,9 @@
 .leadtext{
     font-size: 500%;
     color: white;
-  }
+font-family: "-apple-system", "BlinkMacSystemFont", "Roboto", "Helvetica Neue", sans-serif !important;
 
-  .button-87 {
-    margin: 10px;
-    padding: 15px 30px;
-    text-align: center;
-    text-transform: uppercase;
-    transition: 0.5s;
-    background-size: 200% auto;
-    color: white;
-    border-radius: 10px;
-    display: block;
-    border: 0px;
-    font-weight: 700;
-    box-shadow: 0px 0px 14px -7px #f09819;
-    background-image: linear-gradient(45deg, #FF512F 0%, #F09819  51%, #FF512F  100%);
-    cursor: pointer;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
   }
-  
-  .button-87:hover {
-    background-position: right center;
-    /* change the direction of the change here */
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  .button-87:active {
-    transform: scale(0.95);
-  }
-
   
 .button-81 {
     background-color: #fff;

@@ -42,7 +42,7 @@ padding: 50px;
 justify-content: center;
 align-items: center;
 background: #222;
-color: #fff;
+color: #ffffff;
 position: relative;
 
 &:after {
@@ -67,6 +67,8 @@ h2 {
   margin: 0;
   z-index: 2;
   position: relative;
+  top: 26px;
+  text-shadow: -2px -2px 5px #000, 2px -2px 5px #000, -2px 2px 5px #000, 2px 2px 5px #000;
   }
 }
 
@@ -213,15 +215,17 @@ padding: 20px;
 }
 
 #space {
-  background-image: url(https://assets.codepen.io/214624/space.jpg);
+  background-image: url('https://cdn.discordapp.com/attachments/1169346758636224614/1204884020413079653/Marketplaceback.jpg?ex=65d65ab0&is=65c3e5b0&hm=db958e3881eb1d361f9c632901bbe845e93d6ea44ba71f777002cefc573540ea&');
   background-repeat: no-repeat;
   background-size: cover;
+  display: flex;
+  flex-direction: column;
 //   position: relative;
 //   padding: 50px 0;
   
   h2 {
     position: absolute;
-    top: 40px;
+    top: 50px;
     left: 35%;
     
   }
@@ -230,13 +234,14 @@ padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 50px;
+    gap: 60px;
     margin-top: 40px;
     
     .card {
   position: relative;
+  
   width: 300px;
-  height: 400px;
+  height: 350px;
   background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
   border-radius: 10px;
@@ -327,4 +332,73 @@ padding: 20px;
 }
 .pink {
   color: #DE369D;
+}
+
+
+/* CSS */
+.button-57 {
+  position: relative;
+  top: 60px;
+  overflow: hidden;
+  border: 1px solid #18181a;
+  border-radius: 20px;
+  color: #18181a;
+  display: inline-block;
+  font-size: 15px;
+  line-height: 15px;
+  padding: 18px 18px 17px;
+  text-decoration: none;
+  cursor: pointer;
+  background: #fff;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  
+}
+
+.button-57 span:first-child {
+  position: relative;
+  transition: color 600ms cubic-bezier(0.48, 0, 0.12, 1);
+  z-index: 10;
+}
+
+.button-57 span:last-child {
+  color: white;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  transition: all 500ms cubic-bezier(0.48, 0, 0.12, 1);
+  z-index: 100;
+  opacity: 0;
+  top: 62%;
+  left: 50%;
+  transform: translateY(225%) translateX(-50%);
+  height: 14px;
+  line-height: 13px;
+  white-space: nowrap;
+}
+
+.button-57:after {
+  content: "";
+  position: absolute;
+  bottom: -50%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(248, 0, 223);
+  transform-origin: bottom center;
+  transition: transform 600ms cubic-bezier(0.48, 0, 0.12, 1);
+  transform: skewY(9.3deg) scaleY(0);
+  z-index: 50;
+}
+
+.button-57:hover:after {
+  transform-origin: bottom center;
+  transform: skewY(9.3deg) scaleY(2);
+}
+
+.button-57:hover span:last-child {
+  transform: translateX(-50%) translateY(-100%);
+  opacity: 1;
+  transition: all 900ms cubic-bezier(0.48, 0, 0.12, 1);
 }
