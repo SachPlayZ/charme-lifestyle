@@ -98,7 +98,6 @@ const LandingPage = () => {
                     backgroundSize: "cover"
                 }}>
                     <h2>Find your style.</h2>
-                    <br/>
                     <Link to='AiStylist' class="button-52" role="button">AI Stylist</Link>
 
                 </section>
@@ -106,24 +105,21 @@ const LandingPage = () => {
                 <section id="space">
                     <h2>Marketplace</h2>
                     <div className="card-container">
-                        <div className="card">
-                            <img src="https://cdn.discordapp.com/attachments/1170293654896787498/1204478434047164537/istockphoto-876424182-612x612.jpg?ex=65d4e0f4&is=65c26bf4&hm=70bf9c943590d99ddd7d1f33d8abddd8765368ad0e9c500bca83d6e696dab401&" alt="Gota 1" />
+                        <div className="card-2">
                             <div className="card-content">
-                                <h3>Plain Shirts</h3>
-                                <p>₹ 100</p>
-                            </div>
-                        </div>
-                        <div className="card">
-                            <img src="https://cdn.discordapp.com/attachments/1170293654896787498/1204478466356019260/riddhi-fashion-men-shirt-casual-shirts-navy-blue02-xl-trendy-shirts-men-shirts-shirts-casual-shirt-cotton-shirts-shirt-men-shirt-product-images-rvnszwuiph-0-202211101117.webp?ex=65d4e0fc&is=65c26bfc&hm=de0a1fea382f62967daef04e54633e2a6c78cd32ab87d98fae7def498e6f55ba&" alt="Gota 2" />
-                            <div className="card-content">
-                                <h3>Checked Shirts</h3>
+                                <h3>Trendy Striped Shirt</h3>
                                 <p>₹ 130</p>
                             </div>
                         </div>
-                        <div className="card">
-                            <img src="https://cdn.discordapp.com/attachments/1170293654896787498/1204478706199040161/1000_F_275805702_NZRGGlVw1qTQ3DlUXquMgboRJYp8cxWp.jpg?ex=65d4e135&is=65c26c35&hm=c9f48e9f43dcb054381625f464a1ab75361104c0e4f3e882593e68609ace0c84&" alt="Gota 3" />
+                        <div className="card-1">
                             <div className="card-content">
-                                <h3>Kurtis</h3>
+                                <h3>Black Crop Top</h3>
+                                <p>₹ 100</p>
+                            </div>
+                        </div>
+                        <div className="card-3">
+                            <div className="card-content">
+                                <h3>Red Cotton Shirt</h3>
                                 <p>₹ 120</p>
                             </div>
                         </div>
@@ -162,7 +158,7 @@ const LandingPage = () => {
                                 <h3><b>Contact Us</b></h3>
                                 charmelifestyleindia@gmail.com<br />
                                 (+91) 933 086 5517<br />
-                                <a href="https://instagram.com/username" target="_blank">
+                                <Link href="https://instagram.com/username" target="_blank">
                                     <svg
                                         version="1.1"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -187,10 +183,10 @@ const LandingPage = () => {
 	s6.336-2.842,6.336-6.335c0-0.842-0.17-1.645-0.467-2.379h3.459V22.107z"
                                         />
                                     </svg>
-                                </a>
+                                </Link>
                             </div>
                             <div>
-                                <a
+                                <Link
                                     className="image"
                                     href="https://www.instagram.com/eldew/"
                                     style={{

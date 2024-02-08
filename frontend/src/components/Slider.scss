@@ -16,7 +16,8 @@
   background: #000;
   font-size: 18px;
   font-weight: 400;
-  font-family: "-apple-system", "BlinkMacSystemFont", "Roboto", "Helvetica Neue", sans-serif !important;
+  font-family: "-apple-system", "BlinkMacSystemFont", "Roboto", "Helvetica Neue",
+    sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -30,7 +31,7 @@
   transition: 1s all ease-in-out;
 
   &.menuopen {
-    opacity: .6;
+    opacity: 0.6;
     filter: blur(20px);
     transform: scale(1.2);
   }
@@ -52,7 +53,7 @@ section {
     left: 0;
     top: 0;
     background: #000;
-    opacity: .5;
+    opacity: 0.5;
     height: 100%;
     width: 100%;
   }
@@ -70,7 +71,8 @@ section {
     z-index: 2;
     bottom: 10%;
     position: relative;
-    text-shadow: -2px -2px 5px #000, 2px -2px 5px #000, -2px 2px 5px #000, 2px 2px 5px #000;
+    text-shadow: -2px -2px 5px #000, 2px -2px 5px #000, -2px 2px 5px #000,
+      2px 2px 5px #000;
   }
 }
 
@@ -87,7 +89,7 @@ header {
     height: auto;
     margin: 0 auto;
     opacity: 1;
-    transition: .3s all cubic-bezier(0.075, 0.82, 0.165, 1) .6s;
+    transition: 0.3s all cubic-bezier(0.075, 0.82, 0.165, 1) 0.6s;
   }
 
   nav {
@@ -102,13 +104,12 @@ header {
     width: 500px;
     margin: 0 auto;
     top: 120px;
-    background-color: rgba(255, 255, 255, .05);
+    background-color: rgba(255, 255, 255, 0.05);
     border-radius: 200px;
     z-index: 9;
     backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, .06);
-    transition: 1s all cubic-bezier(0.075, 0.82, 0.165, 1) .2s;
-
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: 1s all cubic-bezier(0.075, 0.82, 0.165, 1) 0.2s;
 
     a {
       color: #fff;
@@ -120,16 +121,15 @@ header {
       font-size: 15px;
       letter-spacing: 2px;
       text-transform: lowercase;
-      transition: .3s all cubic-bezier(0.075, 0.82, 0.165, 1) .6s;
+      transition: 0.3s all cubic-bezier(0.075, 0.82, 0.165, 1) 0.6s;
       white-space: nowrap;
-
     }
 
     button {
       -webkit-appearance: none;
-      background: rgba(0, 0, 0, .3);
+      background: rgba(0, 0, 0, 0.3);
       backdrop-filter: blur(5px);
-      border: 1px solid rgba(255, 255, 255, .1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       position: absolute;
       z-index: 99;
       left: 0;
@@ -143,7 +143,7 @@ header {
       outline: 0;
       border: 0;
       cursor: pointer;
-      transition: .3s all cubic-bezier(0.075, 0.82, 0.165, 1) 0.2s;
+      transition: 0.3s all cubic-bezier(0.075, 0.82, 0.165, 1) 0.2s;
       transform: scale(0);
 
       span {
@@ -153,11 +153,12 @@ header {
         display: block;
         margin: 5px auto;
         transform: scalex(0);
-        transition: .6s transform cubic-bezier(0.075, 0.82, 0.165, 1) 0s, .3s margin ease-in 0s;
+        transition: 0.6s transform cubic-bezier(0.075, 0.82, 0.165, 1) 0s,
+          0.3s margin ease-in 0s;
       }
 
       &:hover {
-        border-color: rgba(255, 255, 255, .5);
+        border-color: rgba(255, 255, 255, 0.5);
 
         span {
           margin: 10px auto;
@@ -170,7 +171,7 @@ header {
 header.sticky {
   #logo {
     top: 0;
-    transform: scale(.8);
+    transform: scale(0.8);
     opacity: 0;
     transition-delay: 0.5s;
   }
@@ -188,7 +189,8 @@ header.sticky {
 
       span {
         transform: scalex(1);
-        transition: .6s transform cubic-bezier(0.075, 0.82, 0.165, 1) .8s, .3s margin ease-in 0s;
+        transition: 0.6s transform cubic-bezier(0.075, 0.82, 0.165, 1) 0.8s,
+          0.3s margin ease-in 0s;
       }
     }
 
@@ -218,7 +220,7 @@ header.sticky {
 }
 
 #space {
-  background-image: url('https://cdn.discordapp.com/attachments/1169346758636224614/1204884020413079653/Marketplaceback.jpg?ex=65d65ab0&is=65c3e5b0&hm=db958e3881eb1d361f9c632901bbe845e93d6ea44ba71f777002cefc573540ea&');
+  background-image: url("https://cdn.discordapp.com/attachments/1169346758636224614/1204884020413079653/Marketplaceback.jpg?ex=65d65ab0&is=65c3e5b0&hm=db958e3881eb1d361f9c632901bbe845e93d6ea44ba71f777002cefc573540ea&");
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
@@ -230,7 +232,6 @@ header.sticky {
     position: absolute;
     top: 2.3rem;
     // left: 35%;
-
   }
 
   .card-container {
@@ -240,22 +241,24 @@ header.sticky {
     gap: 7rem;
     margin-top: 40px;
 
-    .card {
+    .card-1 {
       position: relative;
 
       width: 15rem;
       height: 18rem;
-      background-color: rgba(255, 255, 255, 0.2);
+      // background-color: rgba(255, 255, 255, 0.2);
+      background-image: url("https://cdn.discordapp.com/attachments/1169346758636224614/1205093731318112276/20240208_143550.jpg?ex=65d71dff&is=65c4a8ff&hm=95b32e8dbf9320f28e1369abfe78d6da9ef14337d893432f4d8c164a4200a6f5&");
+      background-size: cover;
+      background-position: center;
       backdrop-filter: blur(10px);
       border-radius: 10px;
       overflow: hidden;
       z-index: 100;
       transition: transform 0.3s ease-in-out;
 
-
-
       &:hover {
         transform: scale(1.2);
+        background-image: url("https://cdn.discordapp.com/attachments/1169346758636224614/1205093742416240710/IMG-20240207-WA0086.jpg?ex=65d71e01&is=65c4a901&hm=fe26e8f31385ad9cf95c70e9e7f3d46b5298fd802e0123d2e23842c804dc56fb&");
       }
 
       img {
@@ -286,6 +289,100 @@ header.sticky {
       }
     }
 
+    .card-2 {
+      position: relative;
+
+      width: 15rem;
+      height: 18rem;
+      // background-color: rgba(255, 255, 255, 0.2);
+      background-image: url("https://cdn.discordapp.com/attachments/1169346758636224614/1205094575891288094/20240208_144239.jpg?ex=65d71ec8&is=65c4a9c8&hm=81bee4bf28731de862515823f9cda78e134bdac694529c16d8e3c6eb230f5581&");
+      background-size: cover;
+      background-position: center;
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+      overflow: hidden;
+      z-index: 100;
+      transition: transform 0.3s ease-in-out;
+
+      &:hover {
+        transform: scale(1.2);
+        background-image: url("https://cdn.discordapp.com/attachments/1169346758636224614/1205094590382866452/IMG_20240207_222741_669.jpg?ex=65d71ecb&is=65c4a9cb&hm=a33b1ab37e1ffe3bbc02bc3f7ae58c9d3f8a83228e1f561af2219533a624b614&");
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .card-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+
+        h3 {
+          font-size: 18px;
+          font-weight: bold;
+          margin-bottom: 10px;
+        }
+
+        p {
+          font-size: 14px;
+          margin-bottom: 0;
+        }
+      }
+    }
+    .card-3 {
+      position: relative;
+
+      width: 15rem;
+      height: 18rem;
+      // background-color: rgba(255, 255, 255, 0.2);
+      background-image: url("https://cdn.discordapp.com/attachments/1169346758636224614/1205096924420644954/20240208_144357.jpg?ex=65d720f8&is=65c4abf8&hm=420408110f2761ad27dce1fb03bda0e2b25299935a914805a51c274bd43fbed5&");
+      background-size: cover;
+      background-position: center;
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+      overflow: hidden;
+      z-index: 100;
+      transition: transform 0.3s ease-in-out;
+
+      &:hover {
+        transform: scale(1.2);
+        background-image: url("https://cdn.discordapp.com/attachments/1169346758636224614/1205096950089777162/IMG-20240207-WA0130.jpg?ex=65d720fe&is=65c4abfe&hm=52c366b76ba1d111886ae2c5ecaad66136dbc4a4f69cb2b08d90cd06731abeeb&");
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .card-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+
+        h3 {
+          font-size: 18px;
+          font-weight: bold;
+          margin-bottom: 10px;
+        }
+
+        p {
+          font-size: 14px;
+          margin-bottom: 0;
+        }
+      }
+    }
   }
 }
 
@@ -296,13 +393,13 @@ header.sticky {
   grid-template-rows: 1fr 10rem auto;
   grid-template-areas: "main" "." "footer";
   overflow-x: hidden;
-  background: #F5F7FA;
+  background: #f5f7fa;
   min-height: 10vh;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 
   .footer {
     z-index: 200;
-    --footer-background: #DE369D;
+    --footer-background: #de369d;
     display: grid;
     position: relative;
     grid-area: footer;
@@ -373,16 +470,16 @@ header.sticky {
         font-size: 2rem;
       }
 
-      >div {
+      > div {
         display: flex;
         flex-direction: column;
         justify-content: center;
 
-        >div {
+        > div {
           margin: 0.25rem 0;
 
-          >* {
-            margin-right: .5rem;
+          > * {
+            margin-right: 0.5rem;
           }
         }
 
@@ -396,15 +493,13 @@ header.sticky {
 
         p {
           margin: 0;
-          font-size: .75rem;
+          font-size: 0.75rem;
         }
       }
     }
   }
 
-
   @keyframes bubble-size {
-
     0%,
     75% {
       width: var(--size, 4rem);
@@ -451,7 +546,6 @@ header.sticky {
   //   border-radius: 5px;
   // }
 
-
   // button {
   //   width: 40%;
   //   padding: 10px;
@@ -469,9 +563,8 @@ header.sticky {
 }
 
 .pink {
-  color: #DE369D;
+  color: #de369d;
 }
-
 
 /* CSS */
 .button-57 {
@@ -491,8 +584,6 @@ header.sticky {
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-
-
 }
 
 .button-57 span:first-child {
@@ -517,7 +608,6 @@ header.sticky {
   line-height: 13px;
   white-space: nowrap;
   font-size: 20px;
-
 }
 
 .button-57:after {
@@ -554,7 +644,6 @@ header.sticky {
   border: 1px solid rgb(255, 255, 255);
   cursor: pointer;
   position: relative;
-  top: 26%;
   background-color: rgba(0, 0, 0, 0);
   user-select: none;
   -webkit-user-select: none;
@@ -590,4 +679,5 @@ header.sticky {
 #knowledge {
   display: flex;
   flex-direction: column;
+  gap: 8rem;
 }
