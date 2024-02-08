@@ -5,7 +5,7 @@ import "./Marketplace.css";
 const getData = async () => {
   try {
     const response = await fetch(
-      "https://ec2-13-126-58-192.ap-south-1.compute.amazonaws.com/products",
+      "https://charme-6463739a607a.herokuapp.com/products",
       {
         method: "GET",
         headers: { "Content-Type": "application/json" },
@@ -57,7 +57,7 @@ const Marketplace = () => {
                 <div key={index} className="col pb-3">
                   <div className="card ms-auto me-auto">
                     <img
-                      src={`https://ec2-13-126-58-192.ap-south-1.compute.amazonaws.com/products/image?id=${getProd.id}&n=${hoveredProduct === getProd.id ? 2 : 1}`}
+                      src={`https://charme-6463739a607a.herokuapp.com/products/image?id=${getProd.id}&n=${hoveredProduct === getProd.id ? 2 : 1}`}
                       className="card-img-top sqrmage"
                       alt=""
                       onMouseEnter={() => handleMouseEnter(getProd.id)}
