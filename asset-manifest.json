@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/charme-lifestyle/static/css/main.c919ed47.css",
-    "main.js": "/charme-lifestyle/static/js/main.7f575bd2.js",
+    "main.js": "/charme-lifestyle/static/js/main.63649b5b.js",
     "static/js/592.bf6ca574.chunk.js": "/charme-lifestyle/static/js/592.bf6ca574.chunk.js",
     "index.html": "/charme-lifestyle/index.html",
     "main.c919ed47.css.map": "/charme-lifestyle/static/css/main.c919ed47.css.map",
-    "main.7f575bd2.js.map": "/charme-lifestyle/static/js/main.7f575bd2.js.map",
+    "main.63649b5b.js.map": "/charme-lifestyle/static/js/main.63649b5b.js.map",
     "592.bf6ca574.chunk.js.map": "/charme-lifestyle/static/js/592.bf6ca574.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c919ed47.css",
-    "static/js/main.7f575bd2.js"
+    "static/js/main.63649b5b.js"
   ]
 }
