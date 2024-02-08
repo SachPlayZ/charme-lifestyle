@@ -1,13 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, session, send_from_directory, make_response
 from flask_cors import CORS
-import json
-import random
 import os
 from cs50 import SQL
 from werkzeug.security import generate_password_hash, check_password_hash
 
+
 app = Flask(__name__)
 CORS(app, origins='http://localhost:3000')
+
 
 db = SQL("sqlite:///charme.db")
 
