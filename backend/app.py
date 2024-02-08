@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, jso
 from flask_cors import CORS
 import json
 import random
+import os
 from cs50 import SQL
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -69,6 +70,7 @@ def get_products(id=None):
                 return jsonify({"error": "Invalid request"}), 400
         else:
             products = db.execute("SELECT * FROM products")
+            products = list(reversed(products))
             return jsonify({"products": products})
     if request.method == "OPTIONS":
         return handle_preflight()
@@ -76,11 +78,19 @@ def get_products(id=None):
     
 
 @app.route('/products/image', methods=['GET', 'OPTIONS'])
-def image(id=None):
+def image(id=None, n=None):
     if request.method == "GET":
         id = request.args.get('id')
-        if id is not None:
-            return send_from_directory('static', 'products/' + id + '.jpg')
+        n = request.args.get('n')
+        if id is not None and n is not None:
+            if os.path.exists('static/products/' + id + n + '.jpg'):
+                return send_from_directory('static', 'products/' + id + n + '.jpg')
+            elif os.path.exists('static/products/' + id + n + '.png'):
+                return send_from_directory('static', 'products/'+ id + n + '.png')
+            else:
+                return send_from_directory('static', 'products/default.jpg')
+        else:
+            return send_from_directory('static', 'products/bad.jpg')
     if request.method == "OPTIONS":
         return handle_preflight()
 

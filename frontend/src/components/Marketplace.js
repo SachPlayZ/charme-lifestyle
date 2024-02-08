@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import "./Marketplace.css";
 
 const getData = async () => {
@@ -37,23 +36,32 @@ const Marketplace = () => {
     fetchData();
   }, []);
 
+  const [hoveredProduct, setHoveredProduct] = useState(null);
+
+  const handleMouseEnter = (productId) => {
+    setHoveredProduct(productId);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredProduct(null);
+  };
+
   return (
     <div className="container-fluid">
       <div className="abo2">
         <div className="leadtext text-center pt-3">Marketplace</div>
         <div className="container text-center pt-5 pb-5">
-          <div class="row">
+          <div className="row">
             {data1 &&
               data1.products.map((getProd, index) => (
-                <div key={index} className="col pb-3 ">
+                <div key={index} className="col pb-3">
                   <div className="card ms-auto me-auto">
                     <img
-                      src={
-                        "http://localhost:5000/products/image?id=" +
-                        getProd.id
-                      }
+                      src={`http://localhost:5000/products/image?id=${getProd.id}&n=${hoveredProduct === getProd.id ? 2 : 1}`}
                       className="card-img-top sqrmage"
                       alt=""
+                      onMouseEnter={() => handleMouseEnter(getProd.id)}
+                      onMouseLeave={handleMouseLeave}
                     />
                     <div className="card-body">
                       <h5 className="card-title">{getProd.name}</h5>
@@ -61,7 +69,7 @@ const Marketplace = () => {
                       <Link to={`/product/${getProd.id}`} className="button-1">
                         Buy Now
                       </Link>
-                      <Link class="button-81" role="button">
+                      <Link className="button-81" role="button">
                         Add to Cart
                       </Link>
                     </div>

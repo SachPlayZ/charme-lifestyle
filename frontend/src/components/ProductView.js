@@ -49,11 +49,13 @@ const ProductDetails = () => {
           </div>
           <div className="product">
             <div className="product-photo">
-              <img src={'http://localhost:5000/products/image?id=' + product.id} alt={product.name} />
-              <img src={'http://localhost:5000/products/image?id=' + product.id} alt={product.name} />
+              <img src={'http://localhost:5000/products/image?id=' + product.id + '&n=1'} alt={product.name} />
+              <img src={'http://localhost:5000/products/image?id=' + product.id + '&n=2'} alt={product.name} />
             </div>
             <div className="product-detail">
-              <h1 className="product__title">{product.name}</h1>
+              <h1 className="product__title" style={{
+                color: "white",
+              }}>{product.name}</h1>
               <div className="product__price">₹ {product.price}</div>
               <div className="product__subtitle">{product.description}</div>
               <div className="product__color">
