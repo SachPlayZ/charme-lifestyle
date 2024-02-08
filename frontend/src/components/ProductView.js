@@ -43,7 +43,7 @@ const ProductDetails = () => {
           <div className="containerp">
           <div className="header">
             <div className="header-logo">
-              <span className='whitetext'>Charm</span><span className='pink'>è</span>
+              <Link to="/marketplace"><span className='whitetext'>Charm</span><span className='pink'>è</span></Link>
             </div>
             
           </div>

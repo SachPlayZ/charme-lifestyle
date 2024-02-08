@@ -48,7 +48,7 @@ const Marketplace = () => {
 
   return (
     <div className="container-fluid">
-      <div className="abo2">
+      <div className="abo22">
         <div className="leadtext text-center pt-3">Marketplace</div>
         <div className="container text-center pt-5 pb-5">
           <div className="row">
