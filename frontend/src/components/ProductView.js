@@ -14,7 +14,7 @@ const ProductDetails = () => {
   useEffect(() => {
     async function fetchProductDetails() {
       try {
-        const response = await fetch(`http://127.0.0.1:5000/products?id=${id}`, {
+        const response = await fetch(`https://ec2-13-126-58-192.ap-south-1.compute.amazonaws.com/products?id=${id}`, {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
         });
@@ -49,8 +49,8 @@ const ProductDetails = () => {
           </div>
           <div className="product">
             <div className="product-photo">
-              <img src={'http://localhost:5000/products/image?id=' + product.id + '&n=1'} alt={product.name} />
-              <img src={'http://localhost:5000/products/image?id=' + product.id + '&n=2'} alt={product.name} />
+              <img src={'https://ec2-13-126-58-192.ap-south-1.compute.amazonaws.com/products/image?id=' + product.id + '&n=1'} alt={product.name} />
+              <img src={'https://ec2-13-126-58-192.ap-south-1.compute.amazonaws.com/products/image?id=' + product.id + '&n=2'} alt={product.name} />
             </div>
             <div className="product-detail">
               <h1 className="product__title" style={{
