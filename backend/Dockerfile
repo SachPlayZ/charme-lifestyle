@@ -8,8 +8,6 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-RUN chmod +x /backend/start.sh
-
 EXPOSE 5000
 
 CMD ["python", "app.py"]
